@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class BabyNamesApi {
-  static API_URL = "http://localhost:3000/api/v1";
+  static API_URL = "https://jarekbird-prota-test-api.herokuapp.com/api/v1";
 
   static getBabyNames(list_id) {
     return this.getData("/baby_names?list_id=" + list_id);
