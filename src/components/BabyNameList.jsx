@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchBabyNames } from "../actions/babyNameActions";
 import {
-  getBabyNamesError,
+  getBabyNamesErrors,
   getBabyNames,
   getBabyNamesPending,
   getBabyNamesListId,
@@ -37,7 +37,7 @@ class BabyNameList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  error: getBabyNamesError(state),
+  error: getBabyNamesErrors(state),
   babyNames: getBabyNames(state),
   pending: getBabyNamesPending(state),
   listId: getBabyNamesListId(state),

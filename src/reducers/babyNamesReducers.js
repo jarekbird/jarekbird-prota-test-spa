@@ -25,7 +25,7 @@ export function babyNamesApiReducer(state = initialBabyNamesState, action) {
     case CREATE_BABY_NAME_SUCCESS:
       return { ...state, response: state.response.concat([action.payload]) };
     case CREATE_BABY_NAME_ERROR:
-      return { ...state, error: state.errors.concat([action.error]) };
+      return { ...state, errors: state.errors.concat([action.error]) };
     case UPDATE_BABY_NAME_SUCCESS:
       const index = state.response.findIndex(
         (element) => element.id == action.payload.id
@@ -55,7 +55,8 @@ export function babyNamesListReducer(babyNameListId = initialListId, action) {
 
 export const getBabyNames = (state) => state.babyNames.response;
 export const getBabyNamesPending = (state) => state.babyNames.pending;
-export const getBabyNamesError = (state) => state.babyNames.error;
+export const getBabyNamesErrors = (state) => state.babyNames.errors;
 export const getBabyNamesListId = (state) => state.babyNameListId;
 export const getBabyNameByIndex = (state, index) =>
   state.babyNames.response[index];
+export const getErrorByIndex = (state, index) => state.babyNames.errors[index];

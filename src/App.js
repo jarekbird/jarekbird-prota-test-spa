@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import BabyNameList from "./components/BabyNameList";
 import NewBabyNameForm from "./components/NewBabyNameForm";
+import ToastList from "./components/ToastList";
 import { connect } from "react-redux";
 import { setBabyNameListId } from "./actions/babyNameActions";
 import { getBabyNamesListId } from "./reducers/babyNamesReducers";
@@ -19,6 +20,7 @@ const appComponents = (
       </div>
     </div>
     <BabyNameList />
+    <ToastList />
   </div>
 );
 

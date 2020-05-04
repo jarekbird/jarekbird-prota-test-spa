@@ -37,8 +37,10 @@ export default class BabyNamesApi {
         .then((response) => {
           resolve(response.data);
         })
-        .catch((response) => {
-          reject(response);
+        .catch((error) => {
+          error.response.data == undefined
+            ? reject(error)
+            : resolve(error.response.data);
         });
     });
   }
