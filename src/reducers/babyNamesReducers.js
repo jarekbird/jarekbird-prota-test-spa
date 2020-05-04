@@ -1,24 +1,28 @@
 import {
-  FETCH_BABY_NAMES_PENDING,
   FETCH_BABY_NAMES_SUCCESS,
   FETCH_BABY_NAMES_ERROR,
   SET_BABY_NAME_LIST_ID,
+  CREATE_BABY_NAME_PENDING,
 } from "../actions/babyNameActions";
 
 const initialBabyNamesState = {
-  pending: false,
   response: [],
-  error: null,
+  errors: [],
 };
 
 export function babyNamesApiReducer(state = initialBabyNamesState, action) {
   switch (action.type) {
-    case FETCH_BABY_NAMES_PENDING:
-      return { ...state, pending: true };
     case FETCH_BABY_NAMES_SUCCESS:
-      return { ...state, pending: false, response: action.babyNames };
+      return { ...state, response: action.babyNames };
     case FETCH_BABY_NAMES_ERROR:
-      return { ...state, pending: false, error: action.error };
+      return {
+        ...state,
+        errors: state.errors.concat([action.error]),
+      };
+    case CREATE_BABY_NAME_SUCCESS:
+      return { ...state, response: state.response.concat([action.baby_name]) };
+    case CREATE_BABY_NAME_ERROR:
+      return { ...state, error: state.error.concat([action.error]) };
     default:
       return state;
   }

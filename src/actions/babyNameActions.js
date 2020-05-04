@@ -1,17 +1,22 @@
 import BabyNamesApi from "../utilities/babyNamesApi";
-export const FETCH_BABY_NAMES_PENDING = "FETCH_BABY_NAMES_PENDING";
 export const FETCH_BABY_NAMES_SUCCESS = "FETCH_BABY_NAMES_SUCCESS";
 export const FETCH_BABY_NAMES_ERROR = "FETCH_BABY_NAMES_ERROR";
+export const CREATE_BABY_NAME_SUCCESS = "CREATE_BABY_NAME_SUCCESS";
+export const CREATE_BABY_NAME_ERROR = "CREATE_BABY_NAME_ERROR";
 export const SET_BABY_NAME_LIST_ID = "SET_BABY_NAME_LIST_ID";
 
-function fetchBabyNamesPending() {
-  return { type: FETCH_BABY_NAMES_PENDING };
-}
 function fetchBabyNamesSuccess(babyNames) {
   return { type: FETCH_BABY_NAMES_SUCCESS, babyNames };
 }
 function fetchBabyNamesError(error = null) {
   return { type: FETCH_BABY_NAMES_ERROR, error };
+}
+
+function createBabyNameSuccess() {
+  return { type: CREATE_BABY_NAME_SUCCESS };
+}
+function createBabyNameError(error = null) {
+  return { type: CREATE_BABY_NAME_ERROR, error };
 }
 
 export function setBabyNameListId(babyNameListId = null) {
@@ -20,7 +25,6 @@ export function setBabyNameListId(babyNameListId = null) {
 
 export function fetchBabyNames(list_id = null) {
   return (dispatch) => {
-    dispatch(fetchBabyNamesPending());
     BabyNamesApi.getBabyNames(list_id)
       .then((response) => {
         if (response.error) {
@@ -37,6 +41,16 @@ export function fetchBabyNames(list_id = null) {
 
 export function createBabyName(name = null) {
   return (dispatch) => {
-    dispatch(createBabyNamePending());
+    BabyNamesApi.createBabyName({ name })
+      .then((response) => {
+        if (response.error) {
+          throw response.error;
+        }
+        dispatch(createBabyNameSuccess(response.baby_name));
+        return response.baby_name;
+      })
+      .catch((error) => {
+        dispatch(createBabyNameError(error));
+      });
   };
 }

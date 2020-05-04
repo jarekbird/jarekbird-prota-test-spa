@@ -7,10 +7,13 @@ class NewBabyNameForm extends Component {
       <div>
         <label>New Baby Name</label>
         <input></input>
-        <button>Create</button>
+        <button onClick={this.props.}>Create</button>
       </div>
     );
   }
 }
 
-export default connect()(NewBabyNameForm);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ fetchBabyNames }, dispatch);
+
+export default connect({}, mapDispatchToProps)(NewBabyNameForm);
