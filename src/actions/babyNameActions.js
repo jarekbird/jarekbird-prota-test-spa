@@ -40,10 +40,13 @@ export function fetchBabyNames(list_id = null) {
         if (response.error) {
           throw response.error;
         }
-        dispatch(fetchBabyNamesSuccess(response.baby_names));
-        return response.baby_names;
+        const babyNames =
+          response.baby_names == undefined ? [] : response.baby_names;
+        dispatch(fetchBabyNamesSuccess(babyNames));
+        return babyNames;
       })
       .catch((error) => {
+        console.log(error);
         dispatch(fetchBabyNamesError(error));
       });
   };
