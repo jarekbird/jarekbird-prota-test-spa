@@ -12,8 +12,8 @@ function fetchBabyNamesError(error = null) {
   return { type: FETCH_BABY_NAMES_ERROR, error };
 }
 
-function createBabyNameSuccess() {
-  return { type: CREATE_BABY_NAME_SUCCESS };
+function createBabyNameSuccess(payload) {
+  return { type: CREATE_BABY_NAME_SUCCESS, payload };
 }
 function createBabyNameError(error = null) {
   return { type: CREATE_BABY_NAME_ERROR, error };
@@ -39,14 +39,14 @@ export function fetchBabyNames(list_id = null) {
   };
 }
 
-export function createBabyName(name = null) {
+export function createBabyName(params) {
   return (dispatch) => {
-    BabyNamesApi.createBabyName({ name })
+    BabyNamesApi.createBabyName(params)
       .then((response) => {
         if (response.error) {
           throw response.error;
         }
-        dispatch(createBabyNameSuccess(response.baby_name));
+        dispatch(createBabyNameSuccess(response));
         return response.baby_name;
       })
       .catch((error) => {

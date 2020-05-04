@@ -20,11 +20,10 @@ class BabyNameList extends Component {
   render() {
     const { babyNames, error } = this.props;
     return (
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Name</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>

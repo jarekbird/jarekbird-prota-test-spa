@@ -2,15 +2,22 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import BabyNameList from "./components/BabyNameList";
-import { NewBabyNameForm } from "./components/NewBabyNameForm";
+import NewBabyNameForm from "./components/NewBabyNameForm";
 import { connect } from "react-redux";
 import { setBabyNameListId } from "./actions/babyNameActions";
 import { getBabyNamesListId } from "./reducers/babyNamesReducers";
 import { Redirect } from "react-router-dom";
 
 const appComponents = (
-  <div>
-    <NewBabyNameForm />
+  <div className="container mt-2">
+    <div className="row">
+      <div className="col-lg">
+        <h3>Baby Name List</h3>
+      </div>
+      <div className="col-lg">
+        <NewBabyNameForm />
+      </div>
+    </div>
     <BabyNameList />
   </div>
 );
