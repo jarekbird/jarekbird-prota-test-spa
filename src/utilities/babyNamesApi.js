@@ -8,7 +8,6 @@ export default class BabyNamesApi {
   }
 
   static createBabyName(params) {
-    console.log(params);
     return this.postData("/baby_names", params);
   }
 

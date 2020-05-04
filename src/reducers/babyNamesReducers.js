@@ -4,6 +4,8 @@ import {
   SET_BABY_NAME_LIST_ID,
   CREATE_BABY_NAME_SUCCESS,
   CREATE_BABY_NAME_ERROR,
+  UPDATE_BABY_NAME_ERROR,
+  UPDATE_BABY_NAME_SUCCESS,
 } from "../actions/babyNameActions";
 
 const initialBabyNamesState = {
@@ -24,6 +26,15 @@ export function babyNamesApiReducer(state = initialBabyNamesState, action) {
       return { ...state, response: state.response.concat([action.payload]) };
     case CREATE_BABY_NAME_ERROR:
       return { ...state, error: state.errors.concat([action.error]) };
+    case UPDATE_BABY_NAME_SUCCESS:
+      const index = state.response.findIndex(
+        (element) => element.id == action.payload.id
+      );
+      const new_response = state.response.slice();
+      new_response[index] = action.payload;
+      return { ...state, response: new_response };
+    case UPDATE_BABY_NAME_ERROR:
+      return { ...state, errors: state.errors.concat([action.error]) };
     default:
       return state;
   }
